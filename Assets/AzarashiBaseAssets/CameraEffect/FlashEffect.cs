@@ -9,6 +9,7 @@ class FlashEffect : MonoBehaviour
     public static void Play()
     {
         GameObject go = new GameObject("Flash");
+        //Debug.Break(); デバッグ用一時停止
         go.AddComponent<FlashEffect>();
     }
 
@@ -20,7 +21,7 @@ class FlashEffect : MonoBehaviour
         {
             for (int x = 0; x < texture.width; ++x)
             {
-                texture.SetPixel(x, y, Color.white);
+                texture.SetPixel(x, y, Color.white); //redにすれば赤くなる
             }
         }
 
@@ -33,12 +34,12 @@ class FlashEffect : MonoBehaviour
         float dim = Mathf.Clamp01(Time.deltaTime * 2.0f);
         alpha = Mathf.Clamp01(alpha - dim);
 
-        GUI.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+        GUI.color = new Color(1.0f, 1.0f, 1.0f, alpha); //白から透明になっていく
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture);
 
         if (alpha == 0.0f)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //自分自身を消す
         }
     }
 
